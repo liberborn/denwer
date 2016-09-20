@@ -1,0 +1,133 @@
+/*
+ ###
+ ### Основные стили для элементов.
+ ### Изменяйте их как Вам угодно.
+ ###
+*/
+
+/* Общие стили */
+html, body {
+	font-family:   Verdana, Tahoma, Helvetica, Sans-Serif;
+	font-size:     90%;
+	background:    #ece9d8;
+	margin:        0px;
+	padding:       0px;
+	margin-top:    10px;
+	margin-right:  5px;
+}
+
+/* Общий вид ссылок */
+a.result:link, a.result:visited, a.result:active {
+	color:           #00c;
+	font-family:     Tahoma, Verdana, Helvetica, Sans-Serif;
+	font-size:       120%;
+	font-weight:     normal;
+	text-decoration: underline;
+}
+a.result:hover { text-decoration: none; }
+
+/* Вид ссылок в таблице разбиения на страницы */
+a.ruler:link, a.ruler:visited, a.ruler:active {
+	color:           #960;
+	font-weight:     bold;
+	text-decoration: none;
+}
+a.ruler:hover { text-decoration: underline; }
+
+#ruler {
+	color:       #fff;
+	font-weight: bold;
+	background:  #960;
+}
+
+/* Стили формы */
+input, select {
+	font-family: Verdana, Tahoma, Helvetica, Sans-Serif;
+	font-size:   95%;
+}
+.table-form { margin: 0 auto; font-size: 100%; }
+
+/* Совпавший текст */
+.search-match {
+	background:          #ffd;
+	border:              0px solid ButtonFace;
+	border-width:        1px;
+	border-left-color:   ButtonHighlight;
+	border-right-color:  ButtonShadow;
+	border-top-color:    ButtonHighlight;
+	border-bottom-color: ButtonShadow;
+	margin-top:          5px;
+	margin-bottom:       10px;
+	padding:             3px;
+}
+.search-desc      { font-size: 85%;  }
+.search-desc-path { color:     #060; }
+
+/* Разное */
+div.center     { text-align: center; }
+div.right      { text-align: right;  }
+#in_find_td    { text-align: left; border-top: 2px groove; }
+
+img            { border: 0px; }
+h4             { text-align: center; }
+p              { margin: 10px; text-indent: 2em; text-align: justify; }
+table.solid    { width: 50%; font-size: 100%; border-collapse: collapse; }
+table.solid td { border: 1px #000 solid; text-align: center; }
+
+/*
+ ###
+ ### Не удаляйте ничего ниже!
+ ### Далее идут CSS-фичи. (-;
+ ###
+*/
+
+/* Прогресс-бар */
+#progress-bar {
+	width:       100%;
+	text-align:  center;
+	font-weight: bold;
+	position:    absolute;
+	z-index:     1;
+}
+
+/* Всё, что ниже прогресс-бара */
+#footer {
+	background: #ece9d8;
+	width:       100%;
+	position:    absolute;
+	z-index:     2;
+}
+
+/* «Иконка» двух окошек */
+.win-new-ref {
+	cursor:          pointer;
+	text-decoration: none !important;
+}
+.win-new-ref .back {
+	background: #fff;
+	border:     1px solid #000;
+	border-top: 2px solid #00F;
+	font-size:  7px;
+	padding:    0 3px;
+	top:        -2px;
+	left:       2px;
+	position:   relative;
+}
+.win-new-ref .front {
+	left: -9px;
+	top:  1px;
+}
+
+/* «Скруглённые» края последнего блока */
+#border-top {
+	border-right:  #ece9d8 5px solid;
+	border-top:    #ece9d8 0px solid;
+	border-left:   #ece9d8 5px solid;
+	border-bottom: #cccc99 5px solid;
+}
+#border-bottom {
+	border-right:  #ece9d8 5px solid;
+	border-top:    #cccc99 5px solid;
+	border-left:   #ece9d8 5px solid;
+	border-bottom: #ece9d8 0px solid;
+}

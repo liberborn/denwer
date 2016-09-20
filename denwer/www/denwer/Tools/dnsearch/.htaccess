@@ -1,0 +1,2 @@
+# Для CGI-директории должно быть прописано: «AllowOverride All».
+Options +MultiViews +ExecCGI

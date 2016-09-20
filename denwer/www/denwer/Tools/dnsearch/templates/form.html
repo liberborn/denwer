@@ -1,0 +1,91 @@
+<!--
+Шаблон формы для поиска.
+Данный шаблон оптимизирован как для IE, так и для Opera и Mozilla.
+Особенности:
+	[script_path]  — автоматически заменяется на путь к скрипту;
+	[paths]        — автоматически заменяется на опции для SELECT с путями поиска;
+	[in_find]      — заменяется на имя файла с кэшем (если есть) для возможности
+	                 «поиска по найденному» (не трогайте этот шаблон).
+	[display_none] — заменяется на «display:none;» если это необходимо.
+
+Не трогайте следующие шаблоны:
+	[finish]         — заменяется на 1-цу, если форма будет вставлена
+	                   в страницу с результатами после поиска (иначе — 0).
+	[search_value]   — текущее значение в форме;
+	[dir_value]      — текущее значение в форме;
+	[logic_value]    — текущее значение в форме;
+	[register_value] — текущее значение в форме;
+	[mode_value]     — текущее значение в форме.
+
+P.S. При выводе шаблона этот комментарий будет удалён.
+-->
+
+<form name="dnsearch_form" method="get" action="[script_path]">
+	<table cellspacing="0" cellpadding="0" class="table-form"><tr><td width="100%" nowrap="nowrap">
+
+	<input type="hidden" name="action" value="search" />
+	<input type="text" name="search" size="40" value="Введите строку для поиска" onfocus="if(this.value=='Введите строку для поиска')this.value='';" />
+	<input type="submit" value="Искать" /><br />
+
+	<fieldset>
+	<legend>&nbsp;Опции <a href="[script_path]?action=help" title="Показать подробную помощь." target="_blank">?</a>&nbsp;</legend>
+		<table width="100%" cellspacing="10" cellpadding="0" class="table-form">
+			<tr>
+				<td align="right">Путь:</td>
+				<td width="70%">
+					<select name="dir" style="width:100%">
+						[paths]
+					</select>
+				</td>
+				<td><a href="javascript://" onclick="alert( 'Опция «Путь» указывает, где должен производиться поиск.' ); return false;" title="Показать краткую помощь.">?</a></td>
+			</tr><tr>
+				<td align="right">Логика:</td>
+				<td>
+					<select name="logic" style="width:100%">
+						<option value="and">И</option>
+						<option value="or">Или</option>
+						<option value="all">Фраза</option>
+					</select>
+				</td>
+				<td><a href="javascript://" onclick="alert( 'Опция «Логика» указывает, что в результатах должно быть:\n«И» — все слова;\n«Или» — хотя бы одно;\n«Фраза» — без разделения на слова.' ); return false;" title="Показать краткую помощь.">?</a></td>
+			</tr><tr>
+				<td align="right">Регистр:</td>
+				<td>
+					<select name="register" style="width:100%">
+						<option value="i">Нечувствительный</option>
+						<option value="ni">Чувствительный</option>
+					</select>
+				</td>
+				<td><a href="javascript://" onclick="alert( 'Опция «Регистр» указывает, различать ли «СТРОЧНЫЕ» и «прописные» буквы или нет.' ); return false;" title="Показать краткую помощь.">?</a></td>
+			</tr><tr>
+				<td align="right">Режим:</td>
+				<td>
+					<select name="mode" onchange="dnsearchChangeMode()" style="width:100%">
+						<option value="usual">Обычный</option>
+						<option value="regex">RegEx</option>
+					</select>
+				</td>
+				<td><a href="javascript://" onclick="alert( 'Опция «Режим» позволяет выбрать режимы поиска:\n«Обычный» —\n\tобычный поиск, который всем известен (надеюсь (-; );\n«RegEx» — \n\tрежим, при котором строка, введенная пользователем,\n\tсчитается регулярным выражением Perl.\n\tВ этом режиме опция «Логика» не работает.\n\nНесколько примеров для режима «RegEx»:\n1). Фраза «\\d\\d-\\d\\d-\\d\\d» будет соответствовать, например, дате «01-02-03»;\n2). Фраза «[0-9]» будет соответствовать любой цифре;\n3). Фраза «word1|word2» будет соответствовать либо «word1» либо «word2».\nДля более детального описания, обратитесь к документации по Perl.' ); return false;" title="Показать краткую помощь.">?</a></td>
+			</tr><tr style="[display_none]">
+				<td colspan="2" id="in_find_td">
+					<label for="in_find"><input type="checkbox" name="in_find" id="in_find" value="[in_find]" />Искать в найденном</label>
+				</td>
+				<td><a href="javascript://" onclick="alert( 'Если опция «Искать в найденном» отмечена, следующий поиск (если это возможно)\nбудет производиться в файлах, которые были найдены в предыдущем поиске.\n\n Чтобы воспользоваться этой опцией, необходимо дождаться окончания работы\nтекущего процесса поиска.' ); return false;" title="Показать краткую помощь.">?</a></td>
+			</tr>
+		</table>
+	</fieldset>
+	</td></tr></table>
+</form>
+<script type="text/javascript" src="[script_path]?action=js"></script>
+
+<script language="javascript" type="text/javascript"><!--//--><![CDATA[//><!--
+	if ( [finish] ) {
+		// Изменяет значения в поисковой форме.
+		document.forms['dnsearch_form']['search'].value   = '[search_value]';
+		document.forms['dnsearch_form']['dir'].value      = '[dir_value]';
+		document.forms['dnsearch_form']['logic'].value    = '[logic_value]';
+		document.forms['dnsearch_form']['register'].value = '[register_value]';
+		document.forms['dnsearch_form']['mode'].value     = '[mode_value]';
+		dnsearchChangeMode();
+	}
+//--><!]]></script>

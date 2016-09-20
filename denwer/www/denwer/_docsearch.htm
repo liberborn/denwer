@@ -1,0 +1,124 @@
+<style>
+#docsearch td, #docsearch input { font-size: 100%; }
+#docsearch input { width: 100%; }
+#docsearch .last-used input { background: #FDD; }
+
+</style>
+<table id="docsearch" width="100%" cellpadding="0" cellspacing="0">
+<tbody>
+	<form target="_blank" method="get" action="http://www.denwer.ru/search">
+	<input type="hidden" name="dst" value="google" />
+	<tr>
+		<td>Google</td>
+		<td><input type="text" name="q"/></td>
+		<td><input type="submit" value="Искать"/></td>
+	</tr>
+	</form>
+</tbody>
+<tbody style="display:none">
+	<form target="_blank" method="get" action="http://www.denwer.ru/search">
+		<input type="hidden" name="dst" value="php" />
+		<tr>
+			<td width="1%">PHP</td>
+			<td><input style="margin-left:1em" type="text" name="q"></td>
+		</tr>
+	</form>
+	<form target="_blank" method="get" action="http://www.denwer.ru/search">
+		<input type="hidden" name="dst" value="mysql" />
+		<tr>
+			<td>MySQL</td>
+			<td><input style="margin-left:1em" type="text" name="q"></td>
+		</tr>
+	</form>
+	<form target="_blank" method="get" action="http://www.denwer.ru/search">
+		<input type="hidden" name="dst" value="apache" />
+		<tr>
+			<td>Apache</td>
+			<td><input style="margin-left:1em" type="text" name="q"></td>
+		</tr>
+	</form>
+	<form target="_blank" method="get" action="http://www.denwer.ru/search">
+		<input type="hidden" name="dst" value="perl" />
+		<tr>
+			<td>Perl</td>
+			<td><input style="margin-left:1em" type="text" name="q"></td>
+		</tr>
+	</form>
+	<form target="_blank" method="get" action="http://www.denwer.ru/search">
+		<input type="hidden" name="dst" value="postgresql" />
+		<tr>
+			<td>PostgreSQL</td>
+			<td><input style="margin-left:1em" type="text" name="q"></td>
+		</tr>
+	</form>
+</tbody>
+</table>
+</form>
+
+<script language="JavaScript"><!--
+(function() {
+	var GRAY_COLOR = "#AAAAAA";
+	var curFocus = null;
+
+	var prepareInput = function(inp, name) {
+		inp.defValue = "Поиск по документации " + name;
+		inp.svValue = '';
+		inp.value = inp.defValue;
+		inp.style.color = GRAY_COLOR;
+		inp.onfocus = function() {
+			if (curFocus) {
+				curFocus.svValue = curFocus.value;
+				curFocus.value = curFocus.defValue;
+				curFocus.style.color = GRAY_COLOR;
+			}
+			inp.value = inp.svValue;
+			inp.style.color = '';
+			inp.select();
+			curFocus = inp;
+		}
+	}
+	
+	var prepareTr = function(tr) {
+		var tds = tr.getElementsByTagName('TD');
+		var inputs = tds[1].getElementsByTagName('INPUT');
+		var name = tds[0].innerHTML;
+		prepareInput(inputs[0], name);
+		if (getCookie("lastSearch") == inputs[0].form.dst.value) {
+			tr.className = "last-used";
+		}
+	}
+	
+	var trim = function(s) {
+		return s.replace(/^\s+|\s+$/, '', 'g');
+	}
+	
+	var table = document.getElementById('docsearch');
+	var tbodys = table.getElementsByTagName('TBODY');
+	var buttons = tbodys[1].getElementsByTagName('BUTTON');
+	var googleInp = tbodys[0].getElementsByTagName('INPUT')[0];
+	var forms = tbodys[1].getElementsByTagName('FORM');
+	var trs = tbodys[1].getElementsByTagName('TR');
+	
+	for (var i = 0; i < forms.length; i++) {
+		forms[i].onsubmit = function() { 
+			if (!curFocus || trim(curFocus.value) == "") {
+				alert("Введите поисковую строку в форме!");
+				return false;
+			}
+			setCookie("lastSearch", curFocus.form.dst.value, '/', new Date(new Date().getTime()+1000*3600*24*365*4));
+			for (var i = 0; i < trs.length; i++) {
+				trs[i].className = "";
+			}
+			curFocus.parentNode.parentNode.className = "last-used";
+			return true;
+		}
+	}
+	tbodys[0].style.display = 'none';
+	tbodys[1].style.display = '';
+	googleInp.name = '';
+	
+	for (var i = 0; i < trs.length; i++) {
+		prepareTr(trs[i]);
+	}
+})();
+//--></script>
